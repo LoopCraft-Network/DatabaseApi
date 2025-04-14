@@ -1,0 +1,6 @@
+name: DatabaseApi
+main: TarunCodes\Main
+version: 1.0.0
+api: 5.0.0
+author: TarunCodes
+description: A custom made database api plugin based on libasynql library, made by taruncode
