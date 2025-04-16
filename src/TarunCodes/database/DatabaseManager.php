@@ -35,7 +35,7 @@ class DatabaseManager {
 			"mysql" => "mysql/schema.sql"
 		]);
 
-		$this->database->executeGeneric("udata.init");
+		$this->database->executeGeneric("playerdata.init");
 
 		$this->database->waitAll();
 	}
@@ -43,11 +43,11 @@ class DatabaseManager {
 	public function registerPlayer(Player $player, callable $callback = null): void {
 		$name = $player->getName();
 
-		$this->database->executeSelect("udata.get", [
+		$this->database->executeSelect("playerdata.get", [
 			"name" => $name
 		], function(array $rows) use ($name, $callback) {
 			if (count($rows) === 0) {
-				$this->database->executeInsert("udata.register", [
+				$this->database->executeInsert("playerdata.register", [
 					"name" => $name,
 					"kills" => 0,
 					"death" => 0,
@@ -58,7 +58,7 @@ class DatabaseManager {
 	}
 
 	public  function initPlayerData(Player $player): void {
-		$this->database->executeSelect("udata.get", [
+		$this->database->executeSelect("playerdata.get", [
 			"name" => $player->getName()
 		], function(array $rows) use ($player) {
 			if (count($rows) > 0) {
@@ -97,7 +97,7 @@ class DatabaseManager {
 	}
 
 	public  function loadData(Player $player): void {
-		$this->database->executeSelect("udata.get", [
+		$this->database->executeSelect("playerdata.get", [
 			"name" => $player->getName()
 		], function(array $rows) use ($player) {
 			if (count($rows) > 0) {
@@ -115,7 +115,7 @@ class DatabaseManager {
 		$newKills = self::getPlayerKill($player) + 1;
 		self::$playerdata[$player->getName()]["Kill"] = $newKills;
 
-		$this->database->executeChange("udata.updateKills", [
+		$this->database->executeChange("playerdata.updateKills", [
 			"name" => $player->getName(),
 			"kills" => $newKills
 		]);
@@ -125,7 +125,7 @@ class DatabaseManager {
 		$newDeaths = self::getPlayerDeath($player) + 1;
 		self::$playerdata[$player->getName()]["Death"] = $newDeaths;
 
-		$this->database->executeChange("udata.updateDeaths", [
+		$this->database->executeChange("playerdata.updateDeaths", [
 			"name" => $player->getName(),
 			"deaths" => $newDeaths
 		]);
@@ -135,7 +135,7 @@ class DatabaseManager {
 		$newCoins = self::getPlayerCoin($player) + $amount;
 		self::$playerdata[$player->getName()]["Coin"] = $newCoins;
 
-		$this->database->executeChange("udata.updateCoins", [
+		$this->database->executeChange("playerdata.updateCoins", [
 			"name" => $player->getName(),
 			"coins" => $newCoins
 		]);
@@ -145,7 +145,7 @@ class DatabaseManager {
 		$newCoins = self::getPlayerCoin($player) - $coin;
 		self::$playerdata[$player->getName()]["Coin"] = $newCoins;
 
-		$this->database->executeChange("udata.updateCoins", [
+		$this->database->executeChange("playerdata.updateCoins", [
 			"name" => $player->getName(),
 			"coins" => $newCoins
 		]);
