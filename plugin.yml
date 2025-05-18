@@ -1,5 +1,5 @@
 name: DatabaseApi
-main: TarunCodes\Main
+main: TarunCodes\DatabaseApi
 version: 1.0.0
 api: 5.0.0
 author: TarunCodes
