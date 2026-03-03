@@ -15,7 +15,7 @@ you need to register the player first with this function of the plugin:
 
 ```php
 //First you would need to import classes from the database api plugin.
-DatabaseApi::getInstance()->getDatabase()->initPlayer($player); //player
+DatabaseApi::getInstance()->getDatabase()->initPlayerData($player); //player
 ```
 
 and then call the method you need to in your function. For example:
